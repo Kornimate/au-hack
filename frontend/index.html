@@ -16,16 +16,21 @@
     <svg id="heatmap" width="800" height="600"></svg>
     <script>
         // Generate random data for the heatmap
-        const data = [];
-        const numRectangles = 50; // Number of rectangles to create
 
-        for (let i = 0; i < numRectangles; i++) {
-            data.push({
-                x: Math.random() * (800 - 50), // Random x position
-                y: Math.random() * (600 - 50), // Random y position
-                value: Math.random() // Random value for coloring
-            });
-        }
+        const data = [
+            {
+            x: 0,
+            y: 0,
+            value: 0x000000
+        }, {
+            x: 50,
+            y: 50,
+            value: 100
+        }, {
+            x: 100,
+            y: 100,
+            value: 200
+        }]
 
         // Create the SVG canvas
         const svg = d3.select("#heatmap");

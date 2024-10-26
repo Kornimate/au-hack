@@ -1,17 +1,15 @@
 from flask import Flask,render_template,request, Response, jsonify
 from flask_cors import CORS
-from model import Model
+from model import Model, CreateDataBundle, ConvertB64ToNpArray
 import json
 import requests
-import base64
 import socket
 
 app = Flask(__name__)
-cors = CORS(app, )
-# model = Model()
+cors = CORS(app)
+model = Model()
 
-ws_endpoint = ''
-
+ws_endpoint = 'http://localhost:8080/update'
 
 @app.route('/home')
 def main():
@@ -22,14 +20,26 @@ def eval_picture():
     if request.method != 'POST':
         app.logger.warning('invalid request')
         return
-    data = request.get_json()
     
-    print(f"got value from: {data.get("id", "no id recieved")}")
-    # predictions = model.PredictFromImgArray(base64.base64decode(img_and_num_arr[0]))
-    # resp = requests.post(ws_endpoint, json=predictions)
+    jsonData = request.get_json()
+    
+    print("Value arrived")
+    
+    converted_img = ConvertB64ToNpArray(jsonData.get("data"))
+    
+    results = model.Predict(converted_img)
+    
+    predictions = results[0]  # Get predictions for the first image
 
-    # if resp.status_code >= 400:
-    #       print(f"error while sending data: {resp}")
+    # Extracting information
+    jsonObj = CreateDataBundle(predictions,jsonData.get("id", "no id recieved"))
+    print(jsonObj)
+    
+    resp = requests.post(ws_endpoint, json=jsonObj)
+
+    if resp.status_code >= 400:
+          print(f"error while sending data: {resp}")
+          
     return Response(json.dumps({"response": "ok"}), status=200, mimetype="application/json")
 
 if __name__ == '__main__':

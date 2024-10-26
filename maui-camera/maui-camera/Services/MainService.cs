@@ -14,7 +14,7 @@ namespace maui_camera.Services
 {
     public class MainService
     {
-        const int SecondPerFrames = 5;
+        const int SecondPerFrames = 10;
 
         private Timer? photoTimer;
         private HttpClient client;
@@ -47,7 +47,7 @@ namespace maui_camera.Services
 
             try
             {
-                var base64Image = ImageConverter.ConvertImageAndAddId(await ImageConverter.ConvertImageSourceToByteArray(image), id);
+                var base64Image = ImageConverter.ConvertImageToB64S(await ImageConverter.ConvertImageSourceToByteArray(image), id);
                 
                 if (base64Image == null)
                     return;

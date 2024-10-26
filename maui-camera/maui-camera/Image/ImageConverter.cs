@@ -34,16 +34,12 @@ namespace maui_camera.Image
             return null;
         }
 
-        public static string? ConvertImageAndAddId(byte[]? img, string id)
+        public static string? ConvertImageToB64S(byte[]? img, string id)
         {
             if (img == null)
                 return null;
 
-            string imgb64 = Convert.ToBase64String(img);
-
-            imgb64 += ("&&" + id); //not in base64 encoding
-
-            return imgb64;
+            return Convert.ToBase64String(img);
         }
     }
 }
