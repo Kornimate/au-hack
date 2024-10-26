@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3 Heatmap with Random Rectangles</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .rect {
+            stroke: #ffffff;
+            stroke-width: 1;
+        }
+    </style>
+</head>
+<body>
+    <svg id="heatmap" width="800" height="600"></svg>
+    <script>
+        // Generate random data for the heatmap
+        const data = [];
+        const numRectangles = 50; // Number of rectangles to create
+
+        for (let i = 0; i < numRectangles; i++) {
+            data.push({
+                x: Math.random() * (800 - 50), // Random x position
+                y: Math.random() * (600 - 50), // Random y position
+                value: Math.random() // Random value for coloring
+            });
+        }
+
+        // Create the SVG canvas
+        const svg = d3.select("#heatmap");
+
+        // Define the color scale using a linear gradient
+        const colorScale = d3.scaleSequential()
+            .interpolator(d3.interpolateCool) // Change to any other D3 interpolator for different colors
+            .domain([0, 1]); // Domain for color scale
+
+        // Append rectangles to the SVG for the heatmap
+        svg.selectAll("rect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "rect")
+            .attr("x", d => d.x)
+            .attr("y", d => d.y)
+            .attr("width", 50) // Set width of rectangles
+            .attr("height", 50) // Set height of rectangles
+            .attr("fill", d => colorScale(d.value)); // Fill color based on value
+
+        // Add a legend (optional)
+        const legendHeight = 20;
+        const legendWidth = 300;
+
+        // Create a linear gradient for the legend
+        const gradient = svg.append("defs")
+            .append("linearGradient")
+            .attr("id", "gradient")
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "100%")
+            .attr("y2", "0%");
+
+        gradient.selectAll("stop")
+            .data(colorScale.ticks().map((d, i) => ({
+                offset: (i / (colorScale.ticks().length - 1)) * 100,
+                color: colorScale(d)
+            })))
+            .enter().append("stop")
+            .attr("offset", d => `${d.offset}%`)
+            .attr("stop-color", d => d.color);
+
+        svg.append("rect")
+            .attr("x", 10)
+            .attr("y", 570)
+            .attr("width", legendWidth)
+            .attr("height", legendHeight)
+            .style("fill", "url(#gradient)");
+
+        // Add labels for the legend
+        svg.append("text")
+            .attr("x", 10)
+            .attr("y", 565)
+            .text("Low Value")
+            .style("font-size", "12px");
+
+        svg.append("text")
+            .attr("x", legendWidth + 20)
+            .attr("y", 565)
+            .text("High Value")
+            .style("font-size", "12px");
+    </script>
+</body>
+</html>
