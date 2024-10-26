@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D3 Heatmap with Random Rectangles</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>AU Status</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         .rect {
@@ -13,25 +14,163 @@
     </style>
 </head>
 <body>
+<header>
+    <h1>AU Status - Working overtime so that you do not have to</h1>
+</header>
+
+
+
     <svg id="heatmap" width="800" height="600"></svg>
     <script>
         // Generate random data for the heatmap
-
         const data = [
             {
-            x: 0,
-            y: 0,
-            value: 0x000000
-        }, {
-            x: 50,
-            y: 50,
-            value: 100
-        }, {
-            x: 100,
-            y: 100,
-            value: 200
-        }]
+                x: 200,
+                y: 200,
+                value: 0xEEEEEE
+            },
+            {
+                x: 500,
+                y: 500,
+                value: 0xEEEEEE
+            },
+            {
+                x: 450,
+                y: 450,
+                value: 0xEEEEEE
+            },
+            {
+                x: 450,
+                y: 500,
+                value: 0xEEEEEE
+            },
+            {
+                x: 400,
+                y: 400,
+                value: 0xEEEEEE
+            },
+            {
+                x: 400,
+                y: 450,
+                value: 0xEEEEEE
+            },
+            {
+                x: 400,
+                y: 500,
+                value: 0xEEEEEE
+            },
+            {
+                x: 500,
+                y: 400,
+                value: 0xEEEEEE
+            },
+            {
+                x: 450,
+                y: 400,
+                value: 0xEEEEEE
+            },
+            {
+                x: 500,
+                y: 450,
+                value: 0xEEEEEE
+            },
+            {
+                x: 200,
+                y: 500,
+                value: 0xEEEEEE
+            },
+            {
+                x: 250,
+                y: 500,
+                value: 0xEEEEEE
+            },
+            {
+                x: 300,
+                y: 500,
+                value: 0xEEEEEE
+            },
+            {
+                x: 350,
+                y: 500,
+                value: 0xEEEEEE
+            },
+            {
+                x: 350,
+                y: 400,
+                value: 0xEEEEEE
+            },
+            {
+                x: 300,
+                y: 400,
+                value: 0xEEEEEE
+            },
+            {
+                x: 250,
+                y: 400,
+                value: 0xEEEEEE
+            },
+            {
+                x: 200,
+                y: 400,
+                value: 0xEEEEEE
+            },
+            {
+                x: 200,
+                y: 450,
+                value: 0xEEEEEE
+            },
+            {
+                x: 200,
+                y: 300,
+                value: 0xEEEEEE
+            },
+            {
+                x: 200,
+                y: 250,
+                value: 0xEEEEEE
+            },
+            {
+                x: 250,
+                y: 250,
+                value: 0xEEEEEE
+            },
+            {
+                x: 250,
+                y: 300,
+                value: 0xEEEEEE
+            },
+            {
+                x: 250,
+                y: 200,
+                value: 0xEEEEEE
+            },
+            {
+                x: 500,
+                y: 350,
+                value: 0xEEEEEE
+            },
+            {
+                x: 500,
+                y: 300,
+                value: 0xEEEEEE
+            },
+            {
+                x: 450,
+                y: 350,
+                value: 0xEEEEEE
+            },
+            {
+                x: 450,
+                y: 300,
+                value: 0xEEEEEE
+            },
+            {
+                x: 400,
+                y: 300,
+                value: 0xEEEEEE
+            },
 
+        ]
         // Create the SVG canvas
         const svg = d3.select("#heatmap");
 
@@ -94,5 +233,9 @@
             .text("High Value")
             .style("font-size", "12px");
     </script>
+
+<footer>
+    <p>Footer Text</p>
+</footer>
 </body>
 </html>
