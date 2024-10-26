@@ -13,11 +13,19 @@ namespace maui_camera
             service = new MainService();
 
             service.TakePhoto += UpdateImage;
+            service.ConnectionFailed += ResetState;
+        }
+
+        private void ResetState(object? sender, EventArgs e)
+        {
+            Url.IsEnabled = true;
+            ClientId.IsEnabled = true;
+            StartService.IsEnabled = true;
         }
 
         private void UpdateImage(object? sender, EventArgs e)
         {
-            service.SendToWebSocket(CameraView.GetSnapShot(), Url.Text, Id.Text).Wait();
+            service.SendToWebSocket(CameraView.GetSnapShot(), Url.Text, ClientId.Text).Wait();
         }
 
         private void CameraView_CamerasLoaded(object sender, EventArgs e)
@@ -29,6 +37,15 @@ namespace maui_camera
                 await CameraView.StopCameraAsync();
                 await CameraView.StartCameraAsync();
             });
+        }
+
+        private void Start_Broadcast(object sender, EventArgs e)
+        {
+            service.StartBroadcast();
+
+            Url.IsEnabled = false;
+            ClientId.IsEnabled = false;
+            StartService.IsEnabled = false;
         }
     }
 

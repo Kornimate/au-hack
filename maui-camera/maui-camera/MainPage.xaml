@@ -16,8 +16,13 @@
                            CamerasLoaded="CameraView_CamerasLoaded"/>
             <Entry x:Name="Url"
                Placeholder="Enter Url" />
-            <Entry x:Name="Id"
+            <Entry x:Name="ClientId"
                Placeholder="Enter Id" />
+            <Button x:Name="StartService"
+                Text="Broadcast"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Clicked="Start_Broadcast" />
         </VerticalStackLayout>
     </ScrollView>
 
