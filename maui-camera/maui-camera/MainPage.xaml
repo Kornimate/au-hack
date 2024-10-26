@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv ="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+             x:Class="maui_camera.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="0"
+            Spacing="0"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+            <cv:CameraView x:Name="CameraView"
+                           WidthRequest="300"
+                           HeightRequest="300" 
+                           CamerasLoaded="CameraView_CamerasLoaded"/>
+            <Entry x:Name="Url"
+               Placeholder="Enter Url" />
+            <Entry x:Name="Id"
+               Placeholder="Enter Id" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
