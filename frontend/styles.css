@@ -36,3 +36,13 @@ footer {
     justify-content: center;
     align-items: center;
 }
+
+svg{
+    border: 5px solid #4A90E2;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.tooltip{
+    right: 10px;
+}
