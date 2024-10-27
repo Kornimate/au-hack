@@ -12,162 +12,201 @@
             stroke-width: 1;
         }
     </style>
+    <style>
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 8px;
+            background: lightsteelblue;
+            border-radius: 4px;
+            pointer-events: none;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
 <header>
     <h1>AU Status - Working overtime so that you do not have to</h1>
 </header>
-
-
-
-    <svg id="heatmap" width="800" height="600"></svg>
+<div class="container">
+    <svg id="heatmap" width="350" height="350"></svg>
+</div>
     <script>
         // Generate random data for the heatmap
         const data = [
             {
                 x: 200,
                 y: 200,
-                value: 0xEEEEEE
+                value: 0,
+                id:1
             },
             {
                 x: 500,
                 y: 500,
-                value: 0xEEEEEE
+                value: 0,
+                id:2
             },
             {
                 x: 450,
                 y: 450,
-                value: 0xEEEEEE
+                value: 0,
+                id:3
             },
             {
                 x: 450,
                 y: 500,
-                value: 0xEEEEEE
+                value: 0,
+                id:4
             },
             {
                 x: 400,
                 y: 400,
-                value: 0xEEEEEE
+                value: 0,
+                id:5
             },
             {
                 x: 400,
                 y: 450,
-                value: 0xEEEEEE
+                value: 0,
+                id:6
             },
             {
                 x: 400,
                 y: 500,
-                value: 0xEEEEEE
+                value: 0,
+                id:7
             },
             {
                 x: 500,
                 y: 400,
-                value: 0xEEEEEE
+                value: 0,
+                id:8
             },
             {
                 x: 450,
                 y: 400,
-                value: 0xEEEEEE
+                value: 0,
+                id:9
             },
             {
                 x: 500,
                 y: 450,
-                value: 0xEEEEEE
+                value: 0,
+                id:10
             },
             {
                 x: 200,
                 y: 500,
-                value: 0xEEEEEE
+                value: 0,
+                id:11
             },
             {
                 x: 250,
                 y: 500,
-                value: 0xEEEEEE
+                value: 0,
+                id:12
             },
             {
                 x: 300,
                 y: 500,
-                value: 0xEEEEEE
+                value: 0,
+                id:3
             },
             {
                 x: 350,
                 y: 500,
-                value: 0xEEEEEE
+                value: 0,
+                id:14
             },
             {
                 x: 350,
                 y: 400,
-                value: 0xEEEEEE
+                value: 0,
+                id:15
             },
             {
                 x: 300,
                 y: 400,
-                value: 0xEEEEEE
+                value: 0,
+                id:16
             },
             {
                 x: 250,
                 y: 400,
-                value: 0xEEEEEE
+                value: 0,
+                id:17
             },
             {
                 x: 200,
                 y: 400,
-                value: 0xEEEEEE
+                value: 0,
+                id:18
             },
             {
                 x: 200,
                 y: 450,
-                value: 0xEEEEEE
+                value: 0,
+                id:19
             },
             {
                 x: 200,
                 y: 300,
-                value: 0xEEEEEE
+                value: 0,
+                id:20
             },
             {
                 x: 200,
                 y: 250,
-                value: 0xEEEEEE
+                value: 0,
+                id:21
             },
             {
                 x: 250,
                 y: 250,
-                value: 0xEEEEEE
+                value: 0,
+                id:22
             },
             {
                 x: 250,
                 y: 300,
-                value: 0xEEEEEE
+                value: 0,
+                id:23
             },
             {
                 x: 250,
                 y: 200,
-                value: 0xEEEEEE
+                value: 0,
+                id:24
             },
             {
                 x: 500,
                 y: 350,
-                value: 0xEEEEEE
+                value: 0,
+                id:25
             },
             {
                 x: 500,
                 y: 300,
-                value: 0xEEEEEE
+                value: 0,
+                id:26
             },
             {
                 x: 450,
                 y: 350,
-                value: 0xEEEEEE
+                value: 0,
+                id:27
             },
             {
                 x: 450,
                 y: 300,
-                value: 0xEEEEEE
+                value: 0,
+                id:28
             },
             {
                 x: 400,
                 y: 300,
-                value: 0xEEEEEE
+                value: 0,
+                id:29
             },
 
         ]
@@ -185,8 +224,8 @@
             .enter()
             .append("rect")
             .attr("class", "rect")
-            .attr("x", d => d.x)
-            .attr("y", d => d.y)
+            .attr("x", d => (d.x-200))
+            .attr("y", d => (d.y-200))
             .attr("width", 50) // Set width of rectangles
             .attr("height", 50) // Set height of rectangles
             .attr("fill", d => colorScale(d.value)); // Fill color based on value
@@ -233,9 +272,16 @@
             .text("High Value")
             .style("font-size", "12px");
     </script>
+    <script>
+        async function GetData(){
+            const response = await fetch("http://localhost:5000/status");
+            const data = await response.json()
+            console.log(data)
+        }
+    </script>
 
 <footer>
-    <p>Footer Text</p>
+    <p><img src="" /></p>
 </footer>
 </body>
 </html>

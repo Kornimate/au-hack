@@ -14,7 +14,7 @@ namespace maui_camera.Services
 {
     public class MainService
     {
-        const int SecondPerFrames = 10;
+        const int SecondPerFrames = 5;
 
         private Timer? photoTimer;
         private HttpClient client;
