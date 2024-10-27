@@ -9,7 +9,7 @@ app = Flask(__name__)
 cors = CORS(app)
 model = Model()
 
-ws_endpoint = 'http://localhost:8080/update'
+ws_endpoint = 'http://backend:8080/update'
 
 @app.route('/home')
 def main():
@@ -20,26 +20,26 @@ def eval_picture():
     if request.method != 'POST':
         app.logger.warning('invalid request')
         return
-    
+
     jsonData = request.get_json()
-    
+
     print("Value arrived")
-    
+
     converted_img = ConvertB64ToNpArray(jsonData.get("data"))
-    
+
     results = model.Predict(converted_img)
-    
+
     predictions = results[0]  # Get predictions for the first image
 
     # Extracting information
     jsonObj = CreateDataBundle(predictions,jsonData.get("id", "no id recieved"))
     print(jsonObj)
-    
+
     resp = requests.post(ws_endpoint, json=jsonObj)
 
     if resp.status_code >= 400:
           print(f"error while sending data: {resp}")
-          
+
     return Response(json.dumps({"response": "ok"}), status=200, mimetype="application/json")
 
 if __name__ == '__main__':
