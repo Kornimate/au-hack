@@ -394,7 +394,7 @@
         async function GetData(){
             try{
 
-                const response = await fetch("http://localhost:8080/status");
+                const response = await fetch("http://backend:8080/status");
                 const query = await response.json()
                 
                 console.log(query)
