@@ -1,0 +1,14 @@
+services:
+  frontend:
+    container_name: frontend
+    build: frontend
+    ports:
+      - "80:80"
+  backend:
+    container_name: backend
+    build: backend
+  model:
+    container_name: model
+    build: model
+    ports:
+      - "5000:5000"
